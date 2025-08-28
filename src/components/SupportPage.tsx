@@ -159,6 +159,8 @@ Expected Response Time: ${
       }, 3000);
     } catch (error) {
       console.error('Failed to submit support ticket:', error);
+      // Show error to user
+      alert('Failed to submit support ticket. Please try again or contact us directly at support@securep2p.pro');
     } finally {
       setIsSubmitting(false);
     }
@@ -183,6 +185,12 @@ Expected Response Time: ${
             <div>
               <h2 className={`text-2xl font-bold ${themeClasses.text}`}>Support Center</h2>
               <p className={`text-sm ${themeClasses.textSecondary}`}>Get help with your Securep2p.pro experience</p>
+            <div className={`text-sm ${themeClasses.textSecondary} space-y-1`}>
+              <p>Get help with your Securep2p.pro experience</p>
+              <p className="flex items-center">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                Live agent chat available to resolve most issues instantly
+              </p>
             </div>
           </div>
         </div>
