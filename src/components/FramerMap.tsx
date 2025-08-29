@@ -20,8 +20,8 @@ const ResponsivePageComponent: React.FC = () => {
               height: auto;
               position: relative;
               white-space: pre-wrap;
-              width: 100%;
-              max-width: 510px;
+              width: 510px;
+              max-width: 100%;
               word-break: break-word;
               word-wrap: break-word;
             }
@@ -58,35 +58,30 @@ const ResponsivePageComponent: React.FC = () => {
 
             .framer-wO6gr .framer-18k2t45 {
               flex: 1 0 0px;
-              height: auto;
-              min-height: 300px;
+              height: 527px;
               overflow: visible;
               position: relative;
-              width: 100%;
+              width: 1px;
             }
 
             .framer-wO6gr .framer-19g65u {
               bottom: 0;
               flex: none;
-              height: auto;
-              min-height: 100px;
+              height: 189px;
               position: absolute;
               right: 0;
-              width: 100%;
-              max-width: 1353px;
+              width: 1353px;
               z-index: 1;
             }
 
             .framer-wO6gr .framer-1flele {
               flex: none;
-              height: auto;
-              min-height: 200px;
-              left: 0;
+              height: 345px;
+              left: calc(47.45% - 1019px / 2);
               overflow: visible;
-              position: relative;
-              top: 0;
-              width: 100%;
-              max-width: 1019px;
+              position: absolute;
+              top: 6px;
+              width: 1019px;
               z-index: 1;
             }
 
@@ -94,24 +89,21 @@ const ResponsivePageComponent: React.FC = () => {
               aspect-ratio: 2.43 / 1;
               bottom: 0;
               flex: none;
-              left: 0;
-              position: relative;
+              left: 50%;
+              position: absolute;
               top: 0;
-              width: 100%;
-              max-width: 1280px;
+              width: var(--framer-aspect-ratio-supported, 1280px);
             }
 
             .framer-wO6gr.framer-v-1tt7ii8.framer-a1nsv6 {
-              gap: 20px;
-              height: auto;
-              min-height: 400px;
-              width: 100%;
-              max-width: 810px;
+              gap: 32.5px;
+              height: 585px;
+              width: 810px;
             }
 
             .framer-wO6gr.framer-v-1tt7ii8 .framer-1n504xz {
-              width: 100%;
-              max-width: 332px;
+              width: 332px;
+              max-width: 100%;
             }
 
             .framer-wO6gr.framer-v-1tt7ii8 .framer-12lgdh3 {
@@ -120,15 +112,27 @@ const ResponsivePageComponent: React.FC = () => {
 
             .framer-wO6gr.framer-v-1tt7ii8 .framer-1md4l4h {
               gap: 6.5px;
-              min-height: 200px;
+              min-height: 342px;
             }
 
-            /* Responsive styles for proper resizing across screen sizes */
+            /* Responsive styles to scale elements while preserving original values */
             @media (min-width: 1200px) {
               .framer-wO6gr {
                 width: 100%;
                 max-width: 1200px;
                 margin: 0 auto;
+              }
+              .framer-19g65u {
+                width: 1353px;
+                height: 189px;
+              }
+              .framer-1flele {
+                width: 1019px;
+                height: 345px;
+                left: calc(47.45% - 1019px / 2);
+              }
+              .framer-i3r4jz {
+                width: var(--framer-aspect-ratio-supported, 1280px);
               }
             }
 
@@ -140,27 +144,39 @@ const ResponsivePageComponent: React.FC = () => {
                 padding: 10px;
               }
               .framer-18k2t45 {
-                height: auto;
-                min-height: 250px;
+                height: calc(527px * 0.8);
                 width: 100%;
-              }
-              .framer-i3r4jz {
-                width: 100%;
-                max-width: 810px;
-                aspect-ratio: 2.43 / 1;
-              }
-              .framer-1flele {
-                width: 100%;
-                max-width: 810px;
-                height: auto;
-                min-height: 200px;
-                left: 0;
               }
               .framer-19g65u {
                 width: 100%;
-                max-width: 810px;
+                max-width: calc(1353px * 0.8);
+                height: calc(189px * 0.8);
+                position: relative;
+                right: auto;
+                bottom: auto;
+              }
+              .framer-1flele {
+                width: 100%;
+                max-width: calc(1019px * 0.8);
+                height: calc(345px * 0.8);
+                left: 0;
+                position: relative;
+                top: 0;
+              }
+              .framer-i3r4jz {
+                width: 100%;
+                max-width: calc(1280px * 0.8);
                 height: auto;
-                min-height: 100px;
+                aspect-ratio: 2.43 / 1;
+                left: 0;
+                position: relative;
+                transform: none;
+              }
+              .framer-i3r4jz img,
+              .framer-1flele img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
               }
             }
 
@@ -168,40 +184,44 @@ const ResponsivePageComponent: React.FC = () => {
               .framer-wO6gr {
                 width: 100%;
                 height: auto;
-                gap: 15px;
+                gap: calc(32.5px * 0.6);
                 padding: 10px;
+                box-sizing: border-box;
               }
               .framer-1n504xz {
                 width: 100%;
-                max-width: 100%;
+                max-width: calc(510px * 0.9);
               }
               .framer-12lgdh3 {
                 flex-direction: column;
-                gap: 10px;
+                gap: calc(13.6px * 0.6);
                 width: 100%;
+                align-items: center;
               }
               .framer-1md4l4h {
                 flex-direction: column;
                 width: 100%;
                 height: auto;
-                gap: 10px;
+                gap: calc(10px * 0.6);
               }
               .framer-18k2t45 {
                 width: 100%;
-                height: auto;
+                height: calc(527px * 0.6);
                 min-height: 200px;
               }
               .framer-19g65u {
                 width: 100%;
-                height: auto;
-                min-height: 80px;
+                max-width: calc(1353px * 0.6);
+                height: calc(189px * 0.6);
+                min-height: 100px;
                 position: relative;
                 right: auto;
                 bottom: auto;
               }
               .framer-1flele {
                 width: 100%;
-                height: auto;
+                max-width: calc(1019px * 0.6);
+                height: calc(345px * 0.6);
                 min-height: 150px;
                 left: 0;
                 top: 0;
@@ -209,21 +229,36 @@ const ResponsivePageComponent: React.FC = () => {
               }
               .framer-i3r4jz {
                 width: 100%;
+                max-width: calc(1280px * 0.6);
                 height: auto;
-                aspect-ratio: auto;
+                aspect-ratio: 2.43 / 1;
                 left: 0;
                 position: relative;
                 transform: none;
               }
-              .framer-i3r4jz img {
-                width: 100%;
-                height: auto;
-                object-fit: contain;
-              }
+              .framer-i3r4jz img,
               .framer-1flele img {
                 width: 100%;
                 height: auto;
                 object-fit: contain;
+              }
+              .framer-wO6gr.framer-v-1tt7ii8.framer-a1nsv6 {
+                width: 100%;
+                max-width: calc(810px * 0.9);
+                height: auto;
+                min-height: calc(585px * 0.6);
+                gap: calc(32.5px * 0.6);
+              }
+              .framer-wO6gr.framer-v-1tt7ii8 .framer-1n504xz {
+                width: 100%;
+                max-width: calc(332px * 0.9);
+              }
+              .framer-wO6gr.framer-v-1tt7ii8 .framer-12lgdh3 {
+                gap: calc(8.84px * 0.6);
+              }
+              .framer-wO6gr.framer-v-1tt7ii8 .framer-1md4l4h {
+                gap: calc(6.5px * 0.6);
+                min-height: calc(342px * 0.6);
               }
             }
 
@@ -234,6 +269,18 @@ const ResponsivePageComponent: React.FC = () => {
               width: 100%;
               height: 100%;
               overflow-x: hidden;
+              box-sizing: border-box;
+            }
+
+            /* Ensure viewport scaling */
+            @viewport {
+              width: device-width;
+              initial-scale: 1;
+              maximum-scale: 1;
+              user-scalable: no;
+            }
+            meta[name="viewport"] {
+              content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
             }
           `}
         </style>
