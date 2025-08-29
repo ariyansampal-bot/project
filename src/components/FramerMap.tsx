@@ -5,11 +5,11 @@ const HTML = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- ✅ make it fit mobile screens -->
+    <!-- Make it scale on phones -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
+    <!-- ========== YOUR ORIGINAL CSS (unchanged) ========== -->
     <style>
-      /* keep your exact CSS */
       .framer-1bqezfm{flex:none;height:auto;position:relative;white-space:pre;width:auto}
       .framer-wO6gr .framer-1n504xz{flex:none;height:auto;position:relative;white-space:pre-wrap;width:510px;word-break:break-word;word-wrap:break-word}
       .framer-wO6gr .framer-12lgdh3{align-content:center;align-items:center;display:flex;flex-direction:row;flex-wrap:nowrap;gap:13.6px;height:min-content;justify-content:center;overflow:visible;padding:0;position:relative;width:min-content}
@@ -24,9 +24,38 @@ const HTML = `<!doctype html>
       .framer-wO6gr.framer-v-1tt7ii8 .framer-1md4l4h{gap:6.5px;min-height:342px}
     </style>
 
-    <!-- tiny reset to avoid horizontal scrollbars on mobile (does NOT change your layout) -->
-    <style>
-      html, body { margin: 0; padding: 0; overflow-x: hidden; }
+    <!-- ========== MOBILE-ONLY OVERRIDES (added, original untouched) ========== -->
+    <style id="mobile-overrides">
+      html, body { margin:0; padding:0; overflow-x:hidden; }
+      :root { --framer-aspect-ratio-supported: 100vw; } /* makes .framer-i3r4jz use viewport width */
+
+      @media (max-width: 809px){
+        /* Make outer containers use viewport width */
+        .framer-cPgQa.framer-1vw04pd,
+        .framer-18k2t45 { width: 100vw !important; }
+
+        /* Background map: stop the -50% shift and fit width */
+        .framer-i3r4jz {
+          left: 0 !important;
+          transform: none !important;
+          width: 100vw !important;
+        }
+
+        /* Black strip: fit width on mobile */
+        .framer-19g65u {
+          right: auto !important;
+          width: 100vw !important;
+        }
+
+        /* Center the logo frame and scale inside viewport */
+        .framer-1flele {
+          left: 50% !important;
+          transform: translateX(-50%) !important;
+          width: min(92vw, 1019px) !important;
+          height: auto !important;
+        }
+        .framer-1flele img { width: 100% !important; height: auto !important; object-fit: contain !important; }
+      }
     </style>
   </head>
   <body>
@@ -84,7 +113,7 @@ const HTML = `<!doctype html>
       <div id="overlay"></div>
     </div><!-- /#main -->
 
-    <!-- auto-height helper (so parent iframe adjusts on mobile) -->
+    <!-- Auto-height: keep parent iframe sized on load/resize/content changes -->
     <script>
       (function(){
         function sendHeight(){
@@ -98,7 +127,6 @@ const HTML = `<!doctype html>
         }
         window.addEventListener("load", sendHeight);
         window.addEventListener("resize", sendHeight);
-        // observe DOM changes that can affect height
         var ro = new ResizeObserver(sendHeight);
         ro.observe(document.documentElement);
         ro.observe(document.body);
@@ -113,7 +141,6 @@ const HTML = `<!doctype html>
 const FramerExactEmbed: React.FC = () => {
   const ref = useRef<HTMLIFrameElement>(null);
 
-  // Listen for height messages from the iframe and resize it
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
       if (!e?.data || typeof e.data !== "object") return;
@@ -134,14 +161,7 @@ const FramerExactEmbed: React.FC = () => {
       title="Framer exact embed"
       srcDoc={HTML}
       sandbox="allow-scripts allow-same-origin"
-      style={{
-        width: "100%",
-        maxWidth: "100%",
-        border: "0",
-        display: "block",
-        height: "527px", // initial fallback; will auto-resize
-        overflow: "hidden",
-      }}
+      style={{ width: "100%", maxWidth: "100%", border: 0, display: "block", height: "527px", overflow: "hidden" }}
       loading="lazy"
     />
   );
