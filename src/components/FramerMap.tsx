@@ -77,27 +77,21 @@ const FramerEmbedFixed: React.FC = () => {
 
 <!-- ========== BEGIN: OVERRIDES TO FIX SPLIT/WHITE GAP/RESPONSIVE ========== -->
 <style id="framer-fixes">
-  /* --- Tunable sizes (adjust these 4 variables to taste) --- */
+  /* Tunables */
   #__framer-exact-root{
-    --banner-h-desktop: 527px;   /* overall banner height on large screens */
-    --banner-h-mobile:  300px;   /* overall banner height on mobile */
-    --strip-h-desktop: 1895px;   /* black SVG strip height (desktop) */
-    --strip-h-mobile:   140px;   /* black SVG strip height (mobile) */
-    --logo-max-w:       780px;   /* max width of the center logo block */
+    --banner-h-desktop: 520px;  /* overall banner height on large screens */
+    --banner-h-mobile:  340px;  /* overall banner height on mobile */
+    --strip-h-desktop:  189px;  /* ✅ FIXED: was 1895px (typo) */
+    --strip-h-mobile:   120px;
+    --logo-max-w:       880px;
   }
 
-  /* contain it like a banner, full width */
-  #__framer-exact-root .framer-cPgQa.framer-1vw04pd {
-    min-height: auto !important;
-    width: 100% !important;
-  }
+  /* Make the embed act like a normal banner block */
+  #__framer-exact-root { position: relative; display: block; width: 100%; }
+  #__framer-exact-root .framer-cPgQa.framer-1vw04pd { min-height: auto !important; width: 100% !important; }
+  #__framer-exact-root .framer-wO6gr.framer-a1nsv6 { height: auto !important; }
 
-  /* let inner frame size to content */
-  #__framer-exact-root .framer-wO6gr.framer-a1nsv6 {
-    height: auto !important;
-  }
-
-  /* stack all layers as one banner with a fixed (but responsive) height */
+  /* One stacked banner with predictable height */
   #__framer-exact-root .framer-18k2t45 {
     position: relative !important;
     width: 100% !important;
@@ -105,7 +99,7 @@ const FramerEmbedFixed: React.FC = () => {
     overflow: hidden !important;
   }
 
-  /* world map image covers whole banner */
+  /* World map fills the banner */
   #__framer-exact-root .framer-i3r4jz {
     position: absolute !important;
     inset: 0 !important;
@@ -118,21 +112,20 @@ const FramerEmbedFixed: React.FC = () => {
   #__framer-exact-root .framer-i3r4jz img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important; /* fill the banner */
+    object-fit: cover !important;
   }
 
-  /* black SVG strip sits at the bottom */
+  /* Black strip sits at the very bottom of the banner */
   #__framer-exact-root .framer-19g65u {
     position: absolute !important;
-    left: 0 !important; right: 0 !important;
-    bottom: 0 !important; top: auto !important;
+    left: 0 !important; right: 0 !important; bottom: 0 !important;
     width: 100% !important;
     height: var(--strip-h-desktop) !important;
     max-height: none !important;
     z-index: 2 !important;
   }
 
-  /* logo centered above map */
+  /* Logo centered on top */
   #__framer-exact-root .framer-1flele {
     position: absolute !important;
     inset: 0 !important;
@@ -143,7 +136,7 @@ const FramerEmbedFixed: React.FC = () => {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    pointer-events: none !important;
+    pointer-events: none !important; /* don’t block hero buttons */
   }
   #__framer-exact-root .framer-1flele img {
     width: 100% !important;
@@ -151,22 +144,18 @@ const FramerEmbedFixed: React.FC = () => {
     object-fit: contain !important;
   }
 
-  /* tighten outside container spacing */
-  #__framer-exact-root .framer-1md4l4h { flex-wrap: nowrap !important; }
+  /* Ensure the banner doesn’t overlap your cards; give it a bottom margin */
+  #__framer-exact-root { margin-bottom: 24px; }
 
-  /* Mobile */
+  /* Mobile sizing */
   @media (max-width: 809px) {
-    #__framer-exact-root .framer-18k2t45 {
-      height: var(--banner-h-mobile) !important;
-    }
-    #__framer-exact-root .framer-19g65u {
-      height: var(--strip-h-mobile) !important;
-    }
-    #__framer-exact-root .framer-1flele {
-      width: 88% !important;   /* a bit wider logo on small screens */
-    }
+    #__framer-exact-root .framer-18k2t45 { height: var(--banner-h-mobile) !important; }
+    #__framer-exact-root .framer-19g65u   { height: var(--strip-h-mobile) !important; }
+    #__framer-exact-root .framer-1flele   { width: 88% !important; }
+    #__framer-exact-root { margin-bottom: 16px; }
   }
 </style>
+
 
 <!-- ========== END: OVERRIDES ========== -->
         `,
