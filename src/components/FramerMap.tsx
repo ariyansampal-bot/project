@@ -2,10 +2,14 @@
 import React, { useRef, useEffect } from "react";
 
 const HTML = `<!doctype html>
-${`<html lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- ✅ make it fit mobile screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
     <style>
+      /* keep your exact CSS */
       .framer-1bqezfm{flex:none;height:auto;position:relative;white-space:pre;width:auto}
       .framer-wO6gr .framer-1n504xz{flex:none;height:auto;position:relative;white-space:pre-wrap;width:510px;word-break:break-word;word-wrap:break-word}
       .framer-wO6gr .framer-12lgdh3{align-content:center;align-items:center;display:flex;flex-direction:row;flex-wrap:nowrap;gap:13.6px;height:min-content;justify-content:center;overflow:visible;padding:0;position:relative;width:min-content}
@@ -18,6 +22,11 @@ ${`<html lang="en">
       .framer-wO6gr.framer-v-1tt7ii8 .framer-1n504xz{width:332px}
       .framer-wO6gr.framer-v-1tt7ii8 .framer-12lgdh3{gap:8.84px}
       .framer-wO6gr.framer-v-1tt7ii8 .framer-1md4l4h{gap:6.5px;min-height:342px}
+    </style>
+
+    <!-- tiny reset to avoid horizontal scrollbars on mobile (does NOT change your layout) -->
+    <style>
+      html, body { margin: 0; padding: 0; overflow-x: hidden; }
     </style>
   </head>
   <body>
@@ -74,33 +83,49 @@ ${`<html lang="en">
       </div><!-- /.framer-cPgQa -->
       <div id="overlay"></div>
     </div><!-- /#main -->
+
+    <!-- auto-height helper (so parent iframe adjusts on mobile) -->
+    <script>
+      (function(){
+        function sendHeight(){
+          try{
+            var h = Math.max(
+              document.body.scrollHeight || 0,
+              document.documentElement.scrollHeight || 0
+            );
+            parent.postMessage({ __FRAMER_IFRAME_HEIGHT__: h }, "*");
+          }catch(e){}
+        }
+        window.addEventListener("load", sendHeight);
+        window.addEventListener("resize", sendHeight);
+        // observe DOM changes that can affect height
+        var ro = new ResizeObserver(sendHeight);
+        ro.observe(document.documentElement);
+        ro.observe(document.body);
+        setTimeout(sendHeight, 50);
+        setTimeout(sendHeight, 200);
+      })();
+    </script>
+
   </body>
-</html>`}`;
+</html>`;
 
 const FramerExactEmbed: React.FC = () => {
   const ref = useRef<HTMLIFrameElement>(null);
 
-  // Auto-size the iframe to the inner document height
+  // Listen for height messages from the iframe and resize it
   useEffect(() => {
-    const iframe = ref.current;
-    if (!iframe) return;
-    const onLoad = () => {
-      try {
-        const doc = iframe.contentDocument || iframe.contentWindow?.document;
-        if (!doc) return;
-        // Fall back to 527px if we can’t read size
-        const h = Math.max(
-          doc.body?.scrollHeight || 0,
-          doc.documentElement?.scrollHeight || 0,
-          527
-        );
-        iframe.style.height = h + "px";
-      } catch {
-        // cross-origin guard; keep default height
+    const onMsg = (e: MessageEvent) => {
+      if (!e?.data || typeof e.data !== "object") return;
+      if ("__FRAMER_IFRAME_HEIGHT__" in e.data) {
+        const h = Number(e.data.__FRAMER_IFRAME_HEIGHT__);
+        if (ref.current && Number.isFinite(h) && h > 0) {
+          ref.current.style.height = h + "px";
+        }
       }
     };
-    iframe.addEventListener("load", onLoad);
-    return () => iframe.removeEventListener("load", onLoad);
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
   }, []);
 
   return (
@@ -108,9 +133,15 @@ const FramerExactEmbed: React.FC = () => {
       ref={ref}
       title="Framer exact embed"
       srcDoc={HTML}
-      // allow Framer script to run
       sandbox="allow-scripts allow-same-origin"
-      style={{ width: "100%", border: "0", display: "block", height: "527px" }} // initial height = your .framer-18k2t45 height
+      style={{
+        width: "100%",
+        maxWidth: "100%",
+        border: "0",
+        display: "block",
+        height: "527px", // initial fallback; will auto-resize
+        overflow: "hidden",
+      }}
       loading="lazy"
     />
   );
