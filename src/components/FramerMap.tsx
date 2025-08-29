@@ -92,7 +92,7 @@ const FramerEmbedResponsive: React.FC = () => {
                           <use href="#svg-125291056_428"></use>
                         </svg>
                       </div>
-                    </div>
+                    </div>s
 
                     <div class="framer-1flele" data-framer-name="Frame 2095584582" style="opacity:1">
                       <div style="position:relative;border-radius:inherit">
