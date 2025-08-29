@@ -79,9 +79,9 @@ const FramerEmbedFixed: React.FC = () => {
 <style id="framer-fixes">
   /* --- Tunable sizes (adjust these 4 variables to taste) --- */
   #__framer-exact-root{
-    --banner-h-desktop: 1353px;   /* overall banner height on large screens */
+    --banner-h-desktop: 527px;   /* overall banner height on large screens */
     --banner-h-mobile:  300px;   /* overall banner height on mobile */
-    --strip-h-desktop: 1353px;   /* black SVG strip height (desktop) */
+    --strip-h-desktop: 153px;   /* black SVG strip height (desktop) */
     --strip-h-mobile:   140px;   /* black SVG strip height (mobile) */
     --logo-max-w:       780px;   /* max width of the center logo block */
   }
