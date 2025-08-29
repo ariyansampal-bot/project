@@ -20,7 +20,8 @@ const ResponsivePageComponent: React.FC = () => {
               height: auto;
               position: relative;
               white-space: pre-wrap;
-              width: 510px;
+              width: 100%;
+              max-width: 510px;
               word-break: break-word;
               word-wrap: break-word;
             }
@@ -57,30 +58,35 @@ const ResponsivePageComponent: React.FC = () => {
 
             .framer-wO6gr .framer-18k2t45 {
               flex: 1 0 0px;
-              height: 527px;
+              height: auto;
+              min-height: 300px;
               overflow: visible;
               position: relative;
-              width: 1px;
+              width: 100%;
             }
 
             .framer-wO6gr .framer-19g65u {
               bottom: 0;
               flex: none;
-              height: 189px;
+              height: auto;
+              min-height: 100px;
               position: absolute;
               right: 0;
-              width: 1353px;
+              width: 100%;
+              max-width: 1353px;
               z-index: 1;
             }
 
             .framer-wO6gr .framer-1flele {
               flex: none;
-              height: 345px;
-              left: calc(47.45% - 1019px / 2);
+              height: auto;
+              min-height: 200px;
+              left: 0;
               overflow: visible;
-              position: absolute;
-              top: 6px;
-              width: 1019px;
+              position: relative;
+              top: 0;
+              width: 100%;
+              max-width: 1019px;
               z-index: 1;
             }
 
@@ -88,20 +94,24 @@ const ResponsivePageComponent: React.FC = () => {
               aspect-ratio: 2.43 / 1;
               bottom: 0;
               flex: none;
-              left: 50%;
-              position: absolute;
+              left: 0;
+              position: relative;
               top: 0;
-              width: var(--framer-aspect-ratio-supported, 1280px);
+              width: 100%;
+              max-width: 1280px;
             }
 
             .framer-wO6gr.framer-v-1tt7ii8.framer-a1nsv6 {
-              gap: 32.5px;
-              height: 585px;
-              width: 810px;
+              gap: 20px;
+              height: auto;
+              min-height: 400px;
+              width: 100%;
+              max-width: 810px;
             }
 
             .framer-wO6gr.framer-v-1tt7ii8 .framer-1n504xz {
-              width: 332px;
+              width: 100%;
+              max-width: 332px;
             }
 
             .framer-wO6gr.framer-v-1tt7ii8 .framer-12lgdh3 {
@@ -110,70 +120,120 @@ const ResponsivePageComponent: React.FC = () => {
 
             .framer-wO6gr.framer-v-1tt7ii8 .framer-1md4l4h {
               gap: 6.5px;
-              min-height: 342px;
+              min-height: 200px;
             }
 
-            /* Additional responsive styles to ensure auto-fit based on screen size */
+            /* Responsive styles for proper resizing across screen sizes */
             @media (min-width: 1200px) {
-              /* Desktop styles (already defined in Framer classes) */
+              .framer-wO6gr {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+              }
             }
 
             @media (min-width: 810px) and (max-width: 1199px) {
               .framer-wO6gr {
-                /* Adjustments for medium screens if needed; Framer variants handle most */
                 width: 100%;
+                max-width: 810px;
                 height: auto;
+                padding: 10px;
               }
               .framer-18k2t45 {
                 height: auto;
+                min-height: 250px;
                 width: 100%;
               }
               .framer-i3r4jz {
                 width: 100%;
-                aspect-ratio: auto;
+                max-width: 810px;
+                aspect-ratio: 2.43 / 1;
+              }
+              .framer-1flele {
+                width: 100%;
+                max-width: 810px;
+                height: auto;
+                min-height: 200px;
+                left: 0;
+              }
+              .framer-19g65u {
+                width: 100%;
+                max-width: 810px;
+                height: auto;
+                min-height: 100px;
               }
             }
 
             @media (max-width: 809px) {
               .framer-wO6gr {
-                /* Adjustments for small screens */
                 width: 100%;
                 height: auto;
-                gap: 20px;
+                gap: 15px;
+                padding: 10px;
               }
               .framer-1n504xz {
                 width: 100%;
+                max-width: 100%;
               }
               .framer-12lgdh3 {
                 flex-direction: column;
                 gap: 10px;
+                width: 100%;
               }
               .framer-1md4l4h {
                 flex-direction: column;
                 width: 100%;
                 height: auto;
+                gap: 10px;
               }
               .framer-18k2t45 {
-                height: auto;
                 width: 100%;
+                height: auto;
+                min-height: 200px;
               }
               .framer-19g65u {
                 width: 100%;
                 height: auto;
+                min-height: 80px;
+                position: relative;
+                right: auto;
+                bottom: auto;
               }
               .framer-1flele {
-                left: 0;
                 width: 100%;
                 height: auto;
+                min-height: 150px;
+                left: 0;
+                top: 0;
+                position: relative;
               }
               .framer-i3r4jz {
                 width: 100%;
+                height: auto;
                 aspect-ratio: auto;
+                left: 0;
+                position: relative;
+                transform: none;
+              }
+              .framer-i3r4jz img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+              }
+              .framer-1flele img {
+                width: 100%;
+                height: auto;
+                object-fit: contain;
               }
             }
 
-            html body {
+            html, body {
               background: #ffffff;
+              margin: 0;
+              padding: 0;
+              width: 100%;
+              height: 100%;
+              overflow-x: hidden;
             }
           `}
         </style>
@@ -193,14 +253,10 @@ const ResponsivePageComponent: React.FC = () => {
           data-framer-page-optimized-at="2025-08-29T08:42:49.763Z"
           data-framer-generated-page=""
         >
-          <style>
-            {`html body { background: #ffffff; }`}
-          </style>
-
           <div
             data-framer-root=""
             className="framer-cPgQa framer-1vw04pd"
-            style={{ minHeight: '100vh', width: 'auto' }}
+            style={{ minHeight: '100vh', width: '100%' }}
           >
             <div className="ssr-variant hidden-6pfjti hidden-bb9v7y">
               <div className="framer-1nxioyv-container">
@@ -270,10 +326,10 @@ const ResponsivePageComponent: React.FC = () => {
                               style={{
                                 display: 'block',
                                 width: '100%',
-                                height: '100%',
+                                height: 'auto',
                                 borderRadius: 'inherit',
                                 objectPosition: 'center',
-                                objectFit: 'cover',
+                                objectFit: 'contain',
                               }}
                             />
                           </div>
@@ -282,7 +338,7 @@ const ResponsivePageComponent: React.FC = () => {
                         <div
                           className="framer-i3r4jz"
                           data-framer-name="steptodown.com806987 1"
-                          style={{ opacity: 0.13, transform: 'translateX(-50%)' }}
+                          style={{ opacity: 0.13 }}
                         >
                           <div
                             style={{
@@ -299,22 +355,22 @@ const ResponsivePageComponent: React.FC = () => {
                               decoding="async"
                               width="4096"
                               height="1686"
-                              sizes="1280.3037px"
+                              sizes="100vw"
                               srcSet="
-                                https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png?scale-down-to=512  512w,
+                                https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png?scale-down-to=512 512w,
                                 https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png?scale-down-to=1024 1024w,
                                 https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png?scale-down-to=2048 2048w,
-                                https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png                     4096w
+                                https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png 4096w
                               "
                               src="https://framerusercontent.com/images/2F3iraszK9WgXgKiscR3z0A.png"
                               alt=""
                               style={{
                                 display: 'block',
                                 width: '100%',
-                                height: '100%',
+                                height: 'auto',
                                 borderRadius: 'inherit',
                                 objectPosition: 'center',
-                                objectFit: 'cover',
+                                objectFit: 'contain',
                               }}
                             />
                           </div>
