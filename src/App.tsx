@@ -870,7 +870,7 @@ function App() {
                   <span>Convert Crypto to </span>
                   <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">Cash</span>
                 </h1>
-                  <FramerMap />
+                
                 <p className={`text-base sm:text-lg lg:text-xl ${themeClasses.textSecondary} max-w-2xl mx-auto mb-6 sm:mb-8 px-2`}>
                   Instant payouts to your bank account. Secure, fast, and trusted by thousands worldwide.
                 </p>
