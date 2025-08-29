@@ -77,69 +77,97 @@ const FramerEmbedFixed: React.FC = () => {
 
 <!-- ========== BEGIN: OVERRIDES TO FIX SPLIT/WHITE GAP/RESPONSIVE ========== -->
 <style id="framer-fixes">
-  /* contain it like a banner, not full screen */
+  /* --- Tunable sizes (adjust these 4 variables to taste) --- */
+  #__framer-exact-root{
+    --banner-h-desktop: 440px;   /* overall banner height on large screens */
+    --banner-h-mobile:  300px;   /* overall banner height on mobile */
+    --strip-h-desktop:  180px;   /* black SVG strip height (desktop) */
+    --strip-h-mobile:   140px;   /* black SVG strip height (mobile) */
+    --logo-max-w:       780px;   /* max width of the center logo block */
+  }
+
+  /* contain it like a banner, full width */
   #__framer-exact-root .framer-cPgQa.framer-1vw04pd {
     min-height: auto !important;
     width: 100% !important;
   }
-  /* make the inner frame size to content */
+
+  /* let inner frame size to content */
   #__framer-exact-root .framer-wO6gr.framer-a1nsv6 {
     height: auto !important;
   }
-  /* stack the three elements on top of each other */
+
+  /* stack all layers as one banner with a fixed (but responsive) height */
   #__framer-exact-root .framer-18k2t45 {
     position: relative !important;
-    height: auto !important;
     width: 100% !important;
+    height: var(--banner-h-desktop) !important;
     overflow: hidden !important;
   }
-  /* background map fills container as a background */
+
+  /* world map image covers whole banner */
   #__framer-exact-root .framer-i3r4jz {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
+    height: 100% !important;
     transform: none !important;
     z-index: 0 !important;
     aspect-ratio: auto !important;
   }
-  /* black SVG strip sits above background */
+  #__framer-exact-root .framer-i3r4jz img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* fill the banner */
+  }
+
+  /* black SVG strip sits at the bottom */
   #__framer-exact-root .framer-19g65u {
     position: absolute !important;
     left: 0 !important; right: 0 !important;
-    bottom: 0 !important;
-    top: auto !important;
+    bottom: 0 !important; top: auto !important;
     width: 100% !important;
-    max-height: 180px !important;
-    height: clamp(90px, 12vw, 180px) !important;
+    height: var(--strip-h-desktop) !important;
+    max-height: none !important;
     z-index: 2 !important;
   }
-  /* logo sits centered above both */
+
+  /* logo centered above map */
   #__framer-exact-root .framer-1flele {
     position: absolute !important;
     inset: 0 !important;
-    width: min(60%, 640px) !important;
-    height: auto !important;
     margin: auto !important;
+    width: min(80%, var(--logo-max-w)) !important;
+    height: auto !important;
     z-index: 3 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    pointer-events: none !important; /* avoid blocking clicks on your hero */
+    pointer-events: none !important;
   }
-  #__framer-exact-root .framer-1flele img { width: 100% !important; height: auto !important; object-fit: contain !important; }
-
-  /* overall banner height (prevents white gap) */
-  #__framer-exact-root .framer-18k2t45::before {
-    content: ""; display: block;
-    height: clamp(160px, 24vw, 280px); /* desktop ~200–280px, mobile smaller */
+  #__framer-exact-root .framer-1flele img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
   }
 
-  /* mobile tweaks */
+  /* tighten outside container spacing */
+  #__framer-exact-root .framer-1md4l4h { flex-wrap: nowrap !important; }
+
+  /* Mobile */
   @media (max-width: 809px) {
-    #__framer-exact-root .framer-19g65u { height: clamp(70px, 18vw, 140px) !important; }
-    #__framer-exact-root .framer-1flele { width: 80% !important; }
+    #__framer-exact-root .framer-18k2t45 {
+      height: var(--banner-h-mobile) !important;
+    }
+    #__framer-exact-root .framer-19g65u {
+      height: var(--strip-h-mobile) !important;
+    }
+    #__framer-exact-root .framer-1flele {
+      width: 88% !important;   /* a bit wider logo on small screens */
+    }
   }
 </style>
+
 <!-- ========== END: OVERRIDES ========== -->
         `,
       }}
